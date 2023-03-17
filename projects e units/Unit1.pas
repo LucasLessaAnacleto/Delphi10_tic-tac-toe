@@ -21,6 +21,7 @@ type
     procedure colunaKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     procedure termina(messagem: String);
     procedure inicia;
@@ -114,6 +115,13 @@ begin
  button1.Left:=(width div 2)-(button1.Width div 2);
  line2.Left:=line1.Left;
  inicia;
+end;
+
+procedure TTikTacToe.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key = VK_RETURN then
+  Perform(WM_NEXTDLGCTL,0,0);
 end;
 
 function TTikTacToe.getPosi(linha, coluna: integer): integer;

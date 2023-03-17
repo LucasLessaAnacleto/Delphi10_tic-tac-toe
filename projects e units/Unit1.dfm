@@ -1,7 +1,7 @@
 object TikTacToe: TTikTacToe
   Left = 0
   Top = 0
-  Caption = 'Tic-Tac-Toe'
+  Caption = 'TicTacToe'
   ClientHeight = 473
   ClientWidth = 702
   Color = clBtnFace
@@ -10,9 +10,11 @@ object TikTacToe: TTikTacToe
   Font.Height = -19
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poDesktopCenter
   OnActivate = FormActivate
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 23
   object line1: TLabel
@@ -65,7 +67,7 @@ object TikTacToe: TTikTacToe
     ParentFont = False
   end
   object Label5: TLabel
-    Left = 208
+    Left = 224
     Top = 112
     Width = 117
     Height = 23
@@ -78,7 +80,7 @@ object TikTacToe: TTikTacToe
     ParentFont = False
   end
   object Label6: TLabel
-    Left = 208
+    Left = 224
     Top = 145
     Width = 132
     Height = 23
@@ -91,7 +93,7 @@ object TikTacToe: TTikTacToe
     ParentFont = False
   end
   object linha: TEdit
-    Left = 331
+    Left = 347
     Top = 112
     Width = 126
     Height = 27
@@ -105,7 +107,7 @@ object TikTacToe: TTikTacToe
     OnKeyPress = linhaKeyPress
   end
   object coluna: TEdit
-    Left = 346
+    Left = 362
     Top = 145
     Width = 111
     Height = 27

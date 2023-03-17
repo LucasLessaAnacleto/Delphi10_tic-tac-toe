@@ -68,7 +68,7 @@ begin
  end else
  if (length(linha.text)>0)and(length(coluna.text)>0) then
  begin
-  if tabuleiro[getPosi(strtoint(linha.Text),strtoint(coluna.Text))] = ' ' then
+  if tabuleiro[getPosi(strtoint(linha.Text),strtoint(coluna.Text))] = '-' then
   begin
     rodada:=rodada+1;
     tabuleiro[getPosi(strtoint(linha.Text),strtoint(coluna.Text))]:=tag(jogador);
@@ -77,14 +77,14 @@ begin
     coluna.clear;
     linha.SetFocus;
     alterna;
-    lb_tittle.caption:='Jogador: '+inttostr(jogador);
+    lb_tittle.caption:='Jogador: "'+uppercase(tag(jogador))+'"';
     if (VerificaVitoria()) then
     begin
-       termina('Jogador'+inttostr(jogador)+' Venceu!!!');
+       termina('Jogador "'+uppercase(tag(jogador))+'" venceu!!!');
     end else
     if rodada = 9 then
     begin
-      termina('Deu Velha!!!');
+      termina('Deu velha!!!');
     end;
   end else begin
    Showmessage('essa posição ja esta prenchida');
@@ -94,7 +94,7 @@ begin
 
   end;
 end else begin
- Showmessage('Defina a linha e coluna que deseja por '+tag(jogador));
+ Showmessage('Defina a linha e coluna que deseja por "'+uppercase(tag(jogador))+'"');
  linha.clear;
  coluna.Clear;
  linha.SetFocus;
@@ -148,7 +148,7 @@ begin
  rodada:=0;
  lb_tittle.Left:=256;
  lb_tittle.top:=24;
- lb_tittle.Caption:='Jogador: '+inttostr(jogador);
+ lb_tittle.Caption:='Jogador: "'+uppercase(tag(jogador))+'"';
  label6.Visible:=true;
  label5.Visible:=true;
  linha.Visible:=true;
@@ -158,7 +158,7 @@ begin
  button1.Caption:='Realizar Jogada';
  for i := 1 to 9 do
  begin
-  tabuleiro[i]:=' ';
+  tabuleiro[i]:='-';
  end;
  imprimir;
 end;
