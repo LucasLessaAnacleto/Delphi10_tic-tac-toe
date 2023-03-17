@@ -1,4 +1,4 @@
-object Form1: TForm1
+object TikTacToe: TTikTacToe
   Left = 0
   Top = 0
   Caption = 'Tik-Tok-Toe'
@@ -52,7 +52,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object lb_tittle: TLabel
-    Left = 256
+    Left = 272
     Top = 24
     Width = 113
     Height = 33

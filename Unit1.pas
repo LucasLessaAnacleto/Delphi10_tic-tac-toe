@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
 
 type
-  TForm1 = class(TForm)
+  TTikTacToe = class(TForm)
     line1: TLabel;
     line2: TLabel;
     line3: TLabel;
@@ -35,7 +35,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  TikTacToe: TTikTacToe;
   tabuleiro:array[1..9]of string;
   jogador:integer=1;
   rodada:integer;
@@ -50,7 +50,7 @@ desejam preencher. A partir da terceira jogada de cada jogador é necessário veri
 se houve algum ganhador. Também é possível que o resultado do jogo seja empate
 (nenhum jogador preencheu uma coluna, uma linha ou uma diagonal).}
 
-function TForm1.alterna: integer;
+function TTikTacToe.alterna: integer;
 begin
  if jogador = 1 then
  jogador:=2
@@ -58,7 +58,7 @@ begin
  jogador:=1;
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TTikTacToe.Button1Click(Sender: TObject);
 var
 calc:integer;
 begin
@@ -68,7 +68,7 @@ begin
  end else
  if (length(linha.text)>0)and(length(coluna.text)>0) then
  begin
-  if tabuleiro[getPosi(strtoint(linha.Text),strtoint(coluna.Text))] = ' ' then
+  if tabuleiro[getPosi(strtoint(linha.Text),strtoint(coluna.Text))] = '-' then
   begin
     rodada:=rodada+1;
     tabuleiro[getPosi(strtoint(linha.Text),strtoint(coluna.Text))]:=tag(jogador);
@@ -77,14 +77,14 @@ begin
     coluna.clear;
     linha.SetFocus;
     alterna;
-    lb_tittle.caption:='Jogador: '+inttostr(jogador);
+    lb_tittle.caption:='Jogador: "'+uppercase(tag(jogador))+'"';
     if (VerificaVitoria()) then
     begin
-       termina('Jogador'+inttostr(jogador)+' Venceu!!!');
+       termina('Jogador "'+uppercase(tag(jogador))+'" venceu!!!');
     end else
     if rodada = 9 then
     begin
-      termina('Deu Velha!!!');
+      termina('Deu velha!!!');
     end;
   end else begin
    Showmessage('essa posição ja esta prenchida');
@@ -94,7 +94,7 @@ begin
 
   end;
 end else begin
- Showmessage('Defina a linha e coluna que deseja por '+tag(jogador));
+ Showmessage('Defina a linha e coluna que deseja por "'+uppercase(tag(jogador))+'"');
  linha.clear;
  coluna.Clear;
  linha.SetFocus;
@@ -103,25 +103,25 @@ end;
 
 end;
 
-procedure TForm1.colunaKeyPress(Sender: TObject; var Key: Char);
+procedure TTikTacToe.colunaKeyPress(Sender: TObject; var Key: Char);
 begin
  if (not(key in ['1'..'3',#8]))or((length(coluna.text) <> 0)and(key<>#8)) then
    key:=#0;
 end;
 
-procedure TForm1.FormActivate(Sender: TObject);
+procedure TTikTacToe.FormActivate(Sender: TObject);
 begin
  button1.Left:=(width div 2)-(button1.Width div 2);
  line2.Left:=line1.Left;
  inicia;
 end;
 
-function TForm1.getPosi(linha, coluna: integer): integer;
+function TTikTacToe.getPosi(linha, coluna: integer): integer;
 begin
  result:=((linha-1)*3)+coluna;
 end;
 
-procedure TForm1.Imprimir;
+procedure TTikTacToe.Imprimir;
 var
 i:integer;
 barra:string;
@@ -140,7 +140,7 @@ barra:='|';
   end;
 end;
 
-procedure TForm1.inicia;
+procedure TTikTacToe.inicia;
 var
 i:integer;
 begin
@@ -148,7 +148,7 @@ begin
  rodada:=0;
  lb_tittle.Left:=256;
  lb_tittle.top:=24;
- lb_tittle.Caption:='Jogador: '+inttostr(jogador);
+ lb_tittle.Caption:='Jogador: "'+uppercase(tag(jogador))+'"';
  label6.Visible:=true;
  label5.Visible:=true;
  linha.Visible:=true;
@@ -158,18 +158,18 @@ begin
  button1.Caption:='Realizar Jogada';
  for i := 1 to 9 do
  begin
-  tabuleiro[i]:=' ';
+  tabuleiro[i]:='-';
  end;
  imprimir;
 end;
 
-procedure TForm1.linhaKeyPress(Sender: TObject; var Key: Char);
+procedure TTikTacToe.linhaKeyPress(Sender: TObject; var Key: Char);
 begin
  if (not(key in ['1'..'3',#8]))or((length(linha.text) <> 0)and(key<>#8)) then
    key:=#0;
 end;
 
-function TForm1.tag(jog:integer): String;
+function TTikTacToe.tag(jog:integer): String;
 begin
  if jog = 1 then
  result:='x'
@@ -177,7 +177,7 @@ begin
  result:='o';
 end;
 
-procedure TForm1.termina(messagem: String);
+procedure TTikTacToe.termina(messagem: String);
 begin
  label6.Visible:=false;
  label5.Visible:=false;
@@ -189,7 +189,7 @@ begin
  Button1.Caption:='Jogar Novamente';
 end;
 
-function TForm1.VerificaVitoria: boolean;
+function TTikTacToe.VerificaVitoria: boolean;
 var
 bool:boolean;
   I,j,p: Integer;
